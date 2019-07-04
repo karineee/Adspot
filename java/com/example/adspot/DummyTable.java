@@ -19,12 +19,12 @@ public class DummyTable {
     @com.google.gson.annotations.SerializedName("username")
     private String mUsername;
     public String getUsername() { return mUsername; }
-    public final void setUsername(String text) { mUsername = text; }
+    protected void setUsername(String text) { mUsername = text; }
 
     @com.google.gson.annotations.SerializedName("password")
     private String mPassword;
     public String getPassword() { return mPassword; }
-    public final void setPassword(String text) { mPassword = text; }
+    protected void setPassword(String text) { mPassword = text; }
 
     @com.google.gson.annotations.SerializedName("createdAt")
     private DateTimeOffset mCreatedAt;
@@ -42,7 +42,7 @@ public class DummyTable {
     public final void setVersion(String version) { mVersion = version; }
 
 
-    private DummyTable() {}
+    public DummyTable() {}
 
     public DummyTable(String text, String text2) {
         //this.setId(id);

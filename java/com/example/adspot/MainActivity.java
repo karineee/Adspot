@@ -1,10 +1,12 @@
 package com.example.adspot;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,26 +20,30 @@ import java.util.concurrent.ExecutionException;
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     private static MobileServiceClient mClient;
-    private static String globalReply;
+    private static String globalReply = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        String testerS = "some text";
+
         //you can now connect to our Azure server and get the client information with 2 lines of code!
         AzureService.initCon(this);
         mClient = AzureService.getClient();
+        Log.d("Hello: ", "test");
 
         //This should store a user. Not a 'real' function. Just for testing
         //enterTableVal();
         getTableVal();
-        //Log.d("GLOBALREPLY: ", globalReply); //proves that the username is found
+        //extractUserInfo(globalReply);
 
         EditText editText = (EditText) findViewById(R.id.editText);
         EditText editText2 = (EditText) findViewById(R.id.editText2);
 
         TextView invalidLogin = findViewById(R.id.invalidLogin);
+
         invalidLogin.setText(""); //make blank
 
     //    ImageView background = findViewById(R.id.imageView3);
@@ -78,8 +84,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void createAcc(View view)
     {
-        Intent intent = new Intent(this, CreateAccActivity.class);
-        startActivity(intent);
+        TextView invalidLogin = findViewById(R.id.invalidLogin);
+
+        invalidLogin.setText(globalReply); //make blank
+
+        //Intent intent = new Intent(this, CreateAccActivity.class);
+        //startActivity(intent);
     }
 
     private int searchTable(String user)
@@ -104,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
     public static void enterTableVal()
     {
         final MobileServiceTable<DummyTable> mDummyTable = mClient.getTable(DummyTable.class);
-        final DummyTable item = new DummyTable("Calvin", "Klein");
+        final DummyTable item = new DummyTable("Biggy", "Smalls");
 
         AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
             @Override
@@ -125,40 +135,48 @@ public class MainActivity extends AppCompatActivity {
 
     public static void getTableVal() {
         final MobileServiceTable<DummyTable> mTable = mClient.getTable(DummyTable.class);
-        String reply;
 
-        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+        @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
             List<DummyTable> res = null;
+            DummyTable obj = new DummyTable();
+
             @Override
-            protected Void doInBackground(Void... params) {
+            protected String doInBackground(Void... params) {
+                String Result = "0";
                 try {
-                    res = mTable
-                            .where()
-                            .field("username").eq("Calvin")
+                   res = mTable
+                            .select("username")
                             .execute()
                             .get();
+
+                    obj = res.get(0);
+                    int i = 0;
+                    while (obj != null){
+                        obj = res.get(i);
+                        Result = obj.getUsername();
+                        Log.d("TASKREPLY0: ", Result);
+                        if (Result.equals("Calvin")) {
+                            break;
+                        }
+                        i = i + 1;
+                    }
+
+
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                return null;
+
+                return Result;
             }
 
-            protected Void onPostExecute(){
-                String reply = "0";
-                if (res == null) {
-                    getReply(reply);
-                    return null;
-                }
-                else {
-                    reply = res.toString();
-                    getReply(reply);
-                    return null;
-                }
+            @Override
+            protected void onPostExecute(String Result){
+                getReply(Result);
             }
         };
-        runAsyncTask(task);
+        runAsyncTask2(task);
 
     }
 
@@ -170,9 +188,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private static AsyncTask<Void, Void, String> runAsyncTask2(AsyncTask<Void, Void, String> task) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        } else {
+            return task.execute();
+        }
+    }
+
     private static void getReply(String rep)
     {
         globalReply = rep;
+        Log.d("GLOBALREPLY: ", globalReply); //proves that the username is found
+    }
+
+    private void extractUserInfo(String data){
+        int a = data.indexOf("username");
+        a = a + 11;
+        String UserName = data.substring(a, 6);
+        globalReply = UserName;
+
     }
 
 }
