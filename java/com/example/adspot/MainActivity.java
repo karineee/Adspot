@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         //This should store a user. Not a 'real' function. Just for testing
         //enterTableVal();
-        getTableVal();
+        //getTableVal();
         //extractUserInfo(globalReply);
 
         EditText editText = (EditText) findViewById(R.id.editText);
@@ -84,11 +84,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void createAcc(View view)
     {
-        TextView invalidLogin = findViewById(R.id.invalidLogin);
+        //TextView invalidLogin = findViewById(R.id.invalidLogin);
 
-        invalidLogin.setText(globalReply); //make blank
+        //invalidLogin.setText(globalReply); //make blank
 
-        //Intent intent = new Intent(this, CreateAccActivity.class);
+        Intent intent = new Intent(this, ChatBotActivity.class);
+        startActivity(intent);
+
+        //Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(
+        //        "https://webchat.botframework.com/embed/my-qna-service2-bot?s=lUEGFT6F1oc.Dh-naOmHujoVnlVCpdxSekbbvgn3hcbSsNK-FZt_vP0"));
         //startActivity(intent);
     }
 
@@ -114,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     public static void enterTableVal()
     {
         final MobileServiceTable<DummyTable> mDummyTable = mClient.getTable(DummyTable.class);
-        final DummyTable item = new DummyTable("Biggy", "Smalls");
+        final DummyTable item = new DummyTable("Robin", "Chou");
 
         AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
             @Override
