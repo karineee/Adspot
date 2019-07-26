@@ -15,7 +15,9 @@ Required jtds download from video.
 
 
 
-Next aims for Consumer View:
+Latest project notes:
+
+Checklist
 
 -To allow up to 5 product recommendations
 
