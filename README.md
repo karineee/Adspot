@@ -10,7 +10,7 @@ Required jtds download from video.
 
 
 
-Next aims:
+Next aims for Consumer View:
 
 -To allow up to 5 product recommendations
 
@@ -18,7 +18,7 @@ Next aims:
 
 -A clean database without duplicates or miscellaneous entries
 
--Refinement of Consumer View 
+
 
 
 
