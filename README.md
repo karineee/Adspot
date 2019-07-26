@@ -12,13 +12,13 @@ Required jtds download from video.
 
 Next aims:
 
-To allow up to 5 product recommendations
+-To allow up to 5 product recommendations
 
-To allow .png images using the Picasso function
+-To allow .png images using the Picasso function
 
-A clean database without duplicates
+-A clean database without duplicates or miscellaneous entries
 
-Refinement of Consumer View 
+-Refinement of Consumer View 
 
 
 
