@@ -17,7 +17,7 @@ Required jtds download from video.
 
 Latest project notes:
 
-Checklist
+Next Steps
 
 -To allow up to 5 product recommendations
 
