@@ -10,6 +10,18 @@ Required jtds download from video.
 
 
 
-Latest update notes:
+Next aims:
 
-Can output .jpg images and product names of first row. To be integrated with function of MainActivity to search by id.
+To allow up to 5 product recommendations
+
+To allow .png images using the Picasso function
+
+A clean database without duplicates
+
+Refinement of Consumer View 
+
+
+
+
+
+
