@@ -1,10 +1,10 @@
-
-
 package com.example.adspot;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.SQLException;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
+import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.squareup.picasso.Picasso;
 
 import java.io.FileOutputStream;
@@ -27,17 +29,21 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class ConsumerHomeActivity extends AppCompatActivity {
 
 
+    public static MobileServiceClient mClient;
+    private static String globalReply = "0";
 
 
     //Below is from https://www.youtube.com/watch?v=WJBs0zKGqH0
     public Connection con;
     public TextView message;
 
-
+    String master = "";
 
     /*
         @Override
@@ -84,6 +90,19 @@ public class ConsumerHomeActivity extends AppCompatActivity {
 
         }
     */
+    private static void getReply(String rep) {
+        globalReply = rep;
+        Log.d("GLOBALREPLY: ", globalReply); //proves that the username is found
+    }
+
+    public static AsyncTask<Void, Void, String> runAsyncTask2(AsyncTask<Void, Void, String> task) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        } else {
+            return task.execute();
+        }
+    }
+/*
     protected String doInBackground(String... params) {
         try {
             con = connectionClass();
@@ -94,20 +113,34 @@ public class ConsumerHomeActivity extends AppCompatActivity {
                 //Change below query according to your database
                 String query = "select * from RecommendationTable";
                 Statement stmt = con.createStatement();
+
+
+
                 ResultSet rs = stmt.executeQuery(query);
                 if (rs.next()) {
                     name1 = rs.getString("Link1"); // Name of Column
-                    //   name2 = rs.getString("Rec1"); // Name of Column
+                    name2 = rs.getString("Rec1"); // Name of Column
 
                     name3 = rs.getString("Link2"); // Name of Column
-                    //  name4 = rs.getString("Rec2"); // Name of Column
+                    name4 = rs.getString("Rec2"); // Name of Column
 
 
                     name5 = rs.getString("Link3"); // Name of Column
-                    //  name6 = rs.getString("Rec3"); // Name of Column
+                    name6 = rs.getString("Rec3"); // Name of Column
 
 
                     z = "query successful";
+
+
+
+
+                    if (rs.next()) {
+
+                        name1 = rs.getString("Link1"); // Name of Column
+
+
+
+                    }
                     isSuccess = true;
                     if (isSuccess) {
                         message = (TextView) findViewById(R.id.textView2);
@@ -129,7 +162,7 @@ public class ConsumerHomeActivity extends AppCompatActivity {
         return z;
 
     }
-
+*/
 
     @SuppressLint("NewApi")
     public Connection connectionClass() {
@@ -151,6 +184,17 @@ public class ConsumerHomeActivity extends AppCompatActivity {
         }
         return connection;
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -211,12 +255,14 @@ public class ConsumerHomeActivity extends AppCompatActivity {
         String password = message.substring((message.indexOf('.') + 1));
 
 
+//changed output
 
-        String master = "Welcome, " + username + "!";
         // String master = name1;
         // String master = z;
         // String master = "welcome";
         // String master = message;
+
+
 
 
 
@@ -235,11 +281,14 @@ public class ConsumerHomeActivity extends AppCompatActivity {
         ImageView ListImg5 = findViewById(R.id.ListImg5);
 
 
+
+
         //Welcome user message
+
+        master = "Welcome, " + username + "!";
+
         TextView textView = findViewById(R.id.textView2);
         textView.setText(master);
-
-
 
 
         //Displays product 1 image link
