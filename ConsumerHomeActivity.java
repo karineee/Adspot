@@ -284,12 +284,12 @@ public class ConsumerHomeActivity extends AppCompatActivity {
 
                 while(rs.next()){
                     name =  rs.getString("Id"); // Name of Column
-                    //Log.d("myTag", "Id: " + name);
-                    rs.next();
+                    Log.d("myTag", "Id1: " + name);
+
 
                     if( name.equals("101"))
                     {
-                        Log.d("myTag", "Id: " + name);
+                        Log.d("myTag", "Id2: " + name);
 
 
                         name1 = rs.getString("Rec1"); // Name of Column
@@ -307,6 +307,7 @@ public class ConsumerHomeActivity extends AppCompatActivity {
                         Log.d("myTag", "Link3: " + name6);
 
                     }
+                    rs.next();
                 }
 
 
