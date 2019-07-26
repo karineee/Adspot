@@ -12,4 +12,4 @@ Required jtds download from video.
 
 Latest update notes:
 
-Can output .jpg images and product names. To be integrated with function of MainActivity to search by id 
+Can output .jpg images and product names of first row. To be integrated with function of MainActivity to search by id 
