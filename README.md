@@ -1,7 +1,7 @@
 # Adspot
 
 
-Can output product images and descriptions by following:
+Can output product images and descriptions. Followed:
 
 https://www.youtube.com/watch?v=WJBs0zKGqH0
 
