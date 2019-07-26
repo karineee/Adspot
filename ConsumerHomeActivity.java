@@ -43,7 +43,7 @@ public class ConsumerHomeActivity extends AppCompatActivity {
     public Connection con;
     public TextView message;
 
-    String master = "";
+    public static String master = "";
 
     /*
         @Override
@@ -75,6 +75,8 @@ public class ConsumerHomeActivity extends AppCompatActivity {
 
         }*/
     String z = "";
+    String testmaster = "";
+    String name = "";
     String name1 = "";
     String name2 = "";
     String name3 = "";
@@ -164,6 +166,9 @@ public class ConsumerHomeActivity extends AppCompatActivity {
     }
 */
 
+
+
+
     @SuppressLint("NewApi")
     public Connection connectionClass() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -186,9 +191,60 @@ public class ConsumerHomeActivity extends AppCompatActivity {
     }
 
 
+    public static void getTableVal() {
+        final MobileServiceTable<DummyTable> mTable = mClient.getTable(DummyTable.class);
+
+        @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
+            List<DummyTable> res = null;
+            DummyTable obj = new DummyTable();
+
+            @Override
+            protected String doInBackground(Void... params) {
+                String Result = "0";
+
+                Log.d("myTag", "Hello future Karine! ");
+                try {
+                    res = mTable
+                            .select("username")
+                            .execute()
+                            .get();
+
+                    obj = res.get(0);
+                    int i = 0;
+                    while (obj != null){
+                        obj = res.get(i);
+                        Result = obj.getUsername();
+                        Log.d("TASKREPLY0: ", Result);
+
+                        Log.d("myTag", "Hello future Karine! ");
+                        if (Result.equals("Testman1")) {
+                            Log.d("myTag", "Hello future Karine! ");
+                            break;
+                        }
+                        i = i + 1;
 
 
+                    }
 
+
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                return Result;
+
+            }
+
+            @Override
+            protected void onPostExecute(String Result){
+                getReply(Result);
+            }
+        };
+        runAsyncTask2(task);
+
+    }
 
 
 
@@ -212,19 +268,67 @@ public class ConsumerHomeActivity extends AppCompatActivity {
                 String query = "select * from RecommendationTable";
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
+
+
+
+//change
+                //test search by id from
+
+
+
+
+
+
+
+
+
+                while(rs.next()){
+                    name =  rs.getString("Id"); // Name of Column
+                    //Log.d("myTag", "Id: " + name);
+                    rs.next();
+
+                    if( name.equals("101"))
+                    {
+                        Log.d("myTag", "Id: " + name);
+
+
+                        name1 = rs.getString("Rec1"); // Name of Column
+                        name2 = rs.getString("Rec2"); // Name of Column
+                        name3 = rs.getString("Rec3"); // Name of Column
+                        name4 = rs.getString("Link1"); // Name of Column
+                        name5 = rs.getString("Link2"); // Name of Column
+                        name6 = rs.getString("Link3"); // Name of Column
+
+                        Log.d("myTag", "Product1: " + name1);
+                        Log.d("myTag", "Link1: " + name4);
+                        Log.d("myTag", "Product2: " + name2);
+                        Log.d("myTag", "Link2: " + name5);
+                        Log.d("myTag", "Product3: " + name3);
+                        Log.d("myTag", "Link3: " + name6);
+
+                    }
+                }
+
+
                 if (rs.next()) {
+
+                  /*
                     name1 = rs.getString("Rec1"); // Name of Column
                     name2 = rs.getString("Rec2"); // Name of Column
                     name3 = rs.getString("Rec3"); // Name of Column
-
-
                     name4 = rs.getString("Link1"); // Name of Column
                     name5 = rs.getString("Link2"); // Name of Column
-                    name6 = rs.getString("Link3"); // Name of Column
+                    name6 = rs.getString("Link3"); // Name of Column */
 
+                    /* OUTPUTS SECOND PRODUCT IN LIST... rs.next() goes down a row!
+                    if (rs.next()){
+                        name1 = rs.getString("Rec1");
+                        Log.d("myTag", "Hello future Karine! " + name1);
 
+                    }*/
 
                     z = "query successful";
+
                     isSuccess = true;
                     if (isSuccess) {
                         message = (TextView) findViewById(R.id.textView2);
