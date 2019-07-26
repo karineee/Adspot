@@ -284,12 +284,12 @@ public class ConsumerHomeActivity extends AppCompatActivity {
 
                 while(rs.next()){
                     name =  rs.getString("Id"); // Name of Column
-                    Log.d("myTag", "Id1: " + name);
+                    Log.d("myTag", "Id: " + name);
 
 
                     if( name.equals("101"))
                     {
-                        Log.d("myTag", "Id2: " + name);
+                        Log.d("myTag", "Id found: " + name);
 
 
                         name1 = rs.getString("Rec1"); // Name of Column
