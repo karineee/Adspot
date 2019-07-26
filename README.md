@@ -12,5 +12,4 @@ Required jtds download from video.
 
 Latest update notes:
 
--Doesn't output .png images
--To be integrated with function of MainActivity to search by id 
+Doesn't output .png images. To be integrated with function of MainActivity to search by id 
