@@ -1,3 +1,4 @@
+
 package com.example.adspot;
 
 import android.annotation.SuppressLint;
@@ -287,17 +288,29 @@ public class ConsumerHomeActivity extends AppCompatActivity {
                     Log.d("myTag", "Id: " + name);
 
 
-                    if( name.equals("101"))
+                    if( name.equals("2"))
                     {
                         Log.d("myTag", "Id found: " + name);
 
 
+                        /* BEFORE
                         name1 = rs.getString("Rec1"); // Name of Column
                         name2 = rs.getString("Rec2"); // Name of Column
                         name3 = rs.getString("Rec3"); // Name of Column
                         name4 = rs.getString("Link1"); // Name of Column
                         name5 = rs.getString("Link2"); // Name of Column
                         name6 = rs.getString("Link3"); // Name of Column
+                            */
+
+                        //AFTER
+                        name1 = rs.getString("Rec3"); // Name of Column
+                        name2 = rs.getString("Rec2"); // Name of Column
+                        name3 = rs.getString("Rec1"); // Name of Column
+                        name4 = rs.getString("Link3"); // Name of Column
+                        name5 = rs.getString("Link2"); // Name of Column
+                        name6 = rs.getString("Link1"); // Name of Column
+
+
 
                         Log.d("myTag", "Product1: " + name1);
                         Log.d("myTag", "Link1: " + name4);
@@ -396,8 +409,9 @@ public class ConsumerHomeActivity extends AppCompatActivity {
         textView.setText(master);
 
 
-        //Displays product 1 image link
+        //Displays product 1 image
         ImageView ListPic1 = findViewById(R.id.ListImg1);
+        //Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(ListPic1);
         Picasso.get().load(name4).into(ListPic1);
 
         //Displays product 1 name
@@ -461,4 +475,5 @@ public class ConsumerHomeActivity extends AppCompatActivity {
 
 
 }
+
 
