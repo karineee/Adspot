@@ -84,6 +84,11 @@ public class ConsumerHomeActivity extends AppCompatActivity {
     String name4 = "";
     String name5 = "";
     String name6 = "";
+    String name7 = "";
+    String name8 = "";
+    String name9 = "";
+    String name10 = "";
+
     Boolean isSuccess = false;
 
     /*
@@ -309,6 +314,10 @@ public class ConsumerHomeActivity extends AppCompatActivity {
                         name4 = rs.getString("Link3"); // Name of Column
                         name5 = rs.getString("Link2"); // Name of Column
                         name6 = rs.getString("Link1"); // Name of Column
+                        name7 = rs.getString("Rec4"); // Name of Column
+                        name8 = rs.getString("Link4"); // Name of Column
+                        name9 = rs.getString("Rec5"); // Name of Column
+                        name10 = rs.getString("Link5"); // Name of Column
 
 
 
@@ -318,6 +327,10 @@ public class ConsumerHomeActivity extends AppCompatActivity {
                         Log.d("myTag", "Link2: " + name5);
                         Log.d("myTag", "Product3: " + name3);
                         Log.d("myTag", "Link3: " + name6);
+                        Log.d("myTag", "Rec4: " + name7);
+                        Log.d("myTag", "Link4: " + name8);
+                        Log.d("myTag", "Rec5: " + name9);
+                        Log.d("myTag", "Link5: " + name10);
 
                     }
                     rs.next();
@@ -438,6 +451,29 @@ public class ConsumerHomeActivity extends AppCompatActivity {
         master = name3;
         TextView textView4 = findViewById(R.id.ListTxt3);
         textView4.setText(master);
+
+
+        //CONT ...
+
+        //Displays product 4 image
+        ImageView ListPic4 = findViewById(R.id.ListImg4);
+        Picasso.get().load(name8).into(ListPic4);
+
+        //Displays product 4 name
+        master = name7;
+        TextView textView5 = findViewById(R.id.ListTxt4);
+        textView5.setText(master);
+
+        //Displays product 5 image
+        ImageView ListPic5 = findViewById(R.id.ListImg5);
+        Picasso.get().load(name10).into(ListPic5);
+
+        //Displays product 5 name
+        master = name9;
+        TextView textView6 = findViewById(R.id.ListTxt5);
+        textView6.setText(master);
+
+
 
 
 
