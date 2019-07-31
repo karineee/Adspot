@@ -56,9 +56,9 @@ Figure F. Consumer Login
 Figure E. Consumer Recommendations
  
 Credits:
-Karine Worley
-Mark Kihlthau
-Kevin Do
+Karine Worley,
+Mark Kihlthau,
+Kevin Do,
 Robin Chou
 
 
