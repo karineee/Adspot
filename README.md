@@ -22,7 +22,7 @@ Installation requirements:
 	2. Code from Github Repositories: 
  
 https://github.com/karineee/Adspot - contains contents of video demo (without the account creation feature) 
-Step 1. Decompress the Adspot_App.zip folder 
+Step 1. Decompress the Adspot_App.zip folder.
 Step 2. Open Android studios and select File> Open project. Once the project loads, go to Tools > AVD manager > Create Virtual Device > Select Pixel XL > Next> Select API Level 28 > Finish. Now to run the emulator, click on Run then Run ‘App’. 
  
 https://github.com/MarkKihlthau/SeniorProject - Working login and account creation integrated with Azure
@@ -39,6 +39,7 @@ Figure A. Provider Login
 Figure B. Provider Menu Screen
 
 Figure C. AI Chatbot Feature
+
 AzureDude is a customer account and will be able to view the products of the Provider account as recommendations. The recommendations were made based upon purchase history of the customer account. Login credentials for AzureDude are:
 Username: AzureDude, Password: cc
 
